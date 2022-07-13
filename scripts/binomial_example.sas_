@@ -1,0 +1,51 @@
+data ex;
+  input Thatch NSource $ estY;
+    do Field=1 to 4 by 1; /* 4 = number of Fields */
+      output;
+	end;
+  cards;
+     2  AmmSulph   6
+     2  IBDU       6
+     2  SCUrea     6
+     2  Urea       4
+
+     5  AmmSulph   6
+     5  IBDU       7
+     5  SCUrea     8
+     5  Urea       5
+
+     8  AmmSulph   6
+     8  IBDU       7
+     8  SCUrea     8
+     8  Urea       5
+run;
+
+proc print data=ex;
+  title1 'Exemplary Set';
+run; 
+
+/* Obtain test statistic */
+proc glimmix data=ex noprofile;
+  class NSource Field Thatch;
+  model estY = NSource | Thatch;
+  random Field Field*NSource;
+  parms (.008)(.07)(.2) / hold=1,2,3;
+  ods output tests3=power;
+  title1 'Dummy Analysis of Exemplary Data Set';
+  title2 '(just to get F-statistic)';
+run;
+
+/* Approximate power */
+data power; set power;
+  where Effect = 'NSource*Thatch';
+  alpha = 0.05;
+  nonCent_param = NumDF*Fvalue;
+  FCrit = finv(1-alpha,NumDF,DenDF,0);
+  Power = 1 - probf(Fcrit,NumDF,DenDF,nonCent_param);
+run;
+proc print data=power noobs;
+  title1 'Power of test for NSource*Thatch';
+run;
+
+
+	

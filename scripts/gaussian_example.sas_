@@ -1,0 +1,165 @@
+data ex;
+  input Thatch NSource $ estY;
+    do Field=1 to 4 by 1; /* 4 = number of Fields */
+      output;
+	end;
+  cards;
+     2  AmmSulph   6
+     2  IBDU       6
+     2  SCUrea     6
+     2  Urea       4
+
+     5  AmmSulph   6
+     5  IBDU       7
+     5  SCUrea     8
+     5  Urea       5
+
+     8  AmmSulph   6
+     8  IBDU       7
+     8  SCUrea     8
+     8  Urea       5
+run;
+
+proc print data=ex;
+  title1 'Exemplary Set';
+run; 
+
+/* Obtain test statistic */
+proc glimmix data=ex noprofile;
+  class NSource Field Thatch;
+  model estY = NSource | Thatch;
+  random Field Field*NSource;
+  parms (.008)(.07)(.2) / hold=1,2,3;
+  ods output tests3=power;
+  title1 'Dummy Analysis of Exemplary Data Set';
+  title2 '(just to get F-statistic)';
+run;
+
+/* Approximate power */
+data power; set power;
+  where Effect = 'NSource*Thatch';
+  alpha = 0.05;
+  nonCent_param = NumDF*Fvalue;
+  FCrit = finv(1-alpha,NumDF,DenDF,0);
+  Power = 1 - probf(Fcrit,NumDF,DenDF,nonCent_param);
+run;
+proc print data=power noobs;
+  title1 'Power of test for NSource*Thatch';
+run;
+
+
+	
+/* alternative dataset */
+
+FILENAME REFFILE '/home/u49712116/Data Folder/pilot_data.csv';
+PROC IMPORT DATAFILE='/home/u49712116/Data Folder/pilot_data.csv' replace
+	DBMS=csv
+	OUT=WORK.pilot;
+	GETNAMES=YES;
+RUN;
+data pilot; set pilot;
+drop VAR1;
+run; 
+proc print data=pilot;
+run;
+proc glimmix data=pilot noprofile;
+	class Family Gender;
+	model Height = Gender;
+	random Family;
+	*parms (2.5436)(3.0961) / hold=1,2;
+	ods output tests3 = power;
+	title1 'Dummy Analysis of Exemplary Data Set';
+	title2 '(just to get F-statistic)';
+run;
+
+data heights;
+   input Family Gender $ Height @@;
+   datalines;
+1 F 67   1 F 66   1 F 64   1 M 71   1 M 72   2 F 63
+2 F 63   2 F 67   2 M 69   2 M 68   2 M 70   3 F 63
+3 M 64   4 F 67   4 F 66   4 M 67   4 M 67   4 M 69
+;
+data input;
+   set heights;
+   if gender = 'F' then gf = 1;
+   else gf = 0;
+   drop gender;
+run;
+proc glimmix data=heights noprofile;
+	class Family Gender;
+	model Height = Gender;
+	random Family;
+	parms (2.5436)(3.0961) / hold=1,2;
+	ods output tests3 = power;
+	title1 'Dummy Analysis of Exemplary Data Set';
+	title2 '(just to get F-statistic)';
+run;
+
+
+data power; set power;
+	where Effect = 'Gender';
+ 	alpha = 0.05;
+  	nonCent_param = NumDF*Fvalue;
+ 	FCrit = finv(1-alpha,NumDF,DenDF,0);
+ 	Power = 1 - probf(Fcrit,NumDF,DenDF,nonCent_param);
+	run;
+proc print data=power noobs;
+	title1 'Power of test for Gender';
+	run;
+
+/* non-normal dataset */
+data pinetree;
+	input treatment $ shape $ resin @@;
+		do Field=1 to 3 by 1; /* 4 = number of Fields */
+	  output;
+    end;
+	cards;
+	Control Circular 9
+	Control Circular 13
+	Control Circular 12
+	Control Diagonal 43
+	Control Diagonal 48
+	Control Diagonal 57
+	Control Check 60
+	Control Check 65
+	Control Check 70
+	Control Rectangular 77
+	Control Rectangular 70
+	Control Rectangular 91
+	Acid Circular 15
+	Acid Circular 13
+	Acid Circular 20 
+	Acid Diagonal 66
+	Acid Diagonal 58
+	Acid Diagonal 73
+	Acid Check 75
+	Acid Check 78
+	Acid Check 90
+	Acid Rectangular 97
+	Acid Rectangular 108
+	Acid Rectangular 99
+	;
+run;
+proc glimmix data=pinetree noprofile;
+	class treatment Field shape;
+	model resin = treatment | shape;
+	random Field Field*shape;
+	*parms (0)(0)(33.8125) / hold=1,2,3;
+	ods output tests3 = power;
+	title1 'Dummy Analysis of Exemplary Data Set';
+	title2 '(just to get F-statistic)';
+run;
+data power; set power;
+	where Effect = 'treatment*shape';
+ 	alpha = 0.05;
+  	nonCent_param = NumDF*Fvalue;
+ 	FCrit = finv(1-alpha,NumDF,DenDF,0);
+ 	Power = 1 - probf(Fcrit,NumDF,DenDF,nonCent_param);
+	run;
+proc print data=power noobs;
+	title1 'Power of test for NSource*Thatch';
+	run;
+
+
+
+	
