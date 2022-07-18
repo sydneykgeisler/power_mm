@@ -1,17 +1,22 @@
 Package: powermm
-Title: What the Package Does (One Line, Title Case)
+Title: Power Approximations of Generalized Linear Mixed Models
 Version: 1.0.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Sydney", "Geisler", , "sydneykgeisler@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Description: Given an exemplary dataset, the power_mm function computes a power
+    approximation for any number of fixed effects specified in the model. Unlike
+    the lme4 package, this function can take on variance components for each random
+    effect and essentially hold them constant within the model. This function is
+    currently only available for exemplary data following the Gaussian distribution.
 Imports:
     lattice,
     lme4,
     blme,
     functional,
     lmerTest,
-    stringr
+    stringr,
+    stats
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
