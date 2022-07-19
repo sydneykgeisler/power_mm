@@ -1,62 +1,73 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
 # power_mm
 
-<!-- badges: start -->
-<!-- badges: end -->
+Thus function allows for estimation of power approximations for generalized 
+linear mixed models. Given an exemplary dataset, fixed and random effects,
+variance components to be held constant in the model, and a significance level,
+this formula can approximate power just like the GLIMMIX procedure in SAS.
+Currently, this method is only available for Gaussian data.
 
-The goal of power_mm is to approximate the power of a generalized linear
-mixed model. This is done by providing an exemplary dataset, which is a
-dataset that mimics how a statistical experiment would look like in real
-life. From here, a user can specify the fixed and random effects to be
-used in the model. The user should have an idea beforehand of what the
-variance components of the random effects are so these can be
-essentially held constant within the model. Currently, power_mm is only
-reliable for Gaussian data.
+## Archived Code
+
+The archived files with the '.sas' extension contain the code that SAS uses to
+approximate power. A description of the family type, whether it be binomial,
+Poisson, or Gaussian is included in the file names. These can be used in
+conjunction with '.R' files to compare results.
+
+'Exemplary Datasets' contains the code to create exemplary data for the 
+Gaussian, binomial, and Poisson examples used.
+
+The file titled 'Errors with Steep Prior Method' shows what happens when 
+'power_mm' is used on non-Gaussian data.
+
+'Gamma Prior Failures' shows that variance components are not held constant
+to the values specified in 'power_mm'.
+
+'Optimization Results' shows that the variance components are held constant,
+but values are inconsistent with SAS results.
 
 ## Installation
 
-You can install the development version of Final from
-[GitHub](https://github.com/) with:
+You can install the development version of power_mm from [GitHub](https://github.com/sydneykgeisler/power_mm.git) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("https://github.com/sydneykgeisler/power_mm.git")
 ```
 
-## Example
+## First Example
 
 This is a basic example which shows you how to solve a common problem:
 
-``` r
-library(Final)
-## basic example code
+```{r example}
+power_mm(Formula = estY ~ NSource*Thatch + (1 | Field) + (1|Field:NSource),
+Varcomp = c(0.008, 0.07), Resid_var = 0.2, Data = ex_gaussian,
+Family = "gaussian", Effect = "NSource*Thatch",
+Alpha = 0.05)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## Second Example
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+Should you wish to use multiple fixed effects for power approximations, you can 
+use concatenation as shown below:
+
+```{r example}
+power_mm(Formula = estY ~ NSource*Thatch + (1 | Field) + (1|Field:NSource), 
+Varcomp = c(0.008, 0.07), Resid_var = 0.2, Data = ex_gaussian,
+Family = "gaussian", Effect = c("NSource", "NSource:Thatch", "Thatch"),
+Alpha = 0.05)
 ```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
