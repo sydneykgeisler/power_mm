@@ -1,19 +1,6 @@
----
-output: github_document
----
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
-
-# power_mm
+# Overview of power_mm
 
 Thus function allows for estimation of power approximations for generalized 
 linear mixed models. Given an exemplary dataset, fixed and random effects,
