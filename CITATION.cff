@@ -1,0 +1,160 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.2.2
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "powermm" in publications use:'
+type: software
+license: MIT
+title: 'powermm: Power Approximations of Generalized Linear Mixed Models'
+version: 1.0.0
+abstract: Given an exemplary dataset, the power_mm function computes a power approximation
+  for any number of fixed effects specified in the model. Unlike the lme4 package,
+  this function can take on variance components for each random effect and essentially
+  hold them constant within the model. This function is currently only available for
+  exemplary data following the Gaussian distribution.
+authors:
+- family-names: Geisler
+  given-names: Sydney
+  email: sydneykgeisler@gmail.com
+  orcid: https://orcid.org/YOUR-ORCID-ID
+preferred-citation:
+  type: manual
+  title: 'powermm: Power Approximations of Generalized Linear Mixed Models'
+  authors:
+  - family-names: Geisler
+    given-names: Sydney
+    email: sydneykgeisler@gmail.com
+    orcid: https://orcid.org/YOUR-ORCID-ID
+  version: 1.0.0
+  abstract: Given an exemplary dataset, the power_mm function computes a power approximation
+    for any number of fixed effects specified in the model. Unlike the lme4 package,
+    this function can take on variance components for each random effect and essentially
+    hold them constant within the model. This function is currently only available
+    for exemplary data following the Gaussian distribution.
+  contact:
+  - family-names: Geisler
+    given-names: Sydney
+    email: sydneykgeisler@gmail.com
+    orcid: https://orcid.org/YOUR-ORCID-ID
+  license: MIT
+  year: '2022'
+contact:
+- family-names: Geisler
+  given-names: Sydney
+  email: sydneykgeisler@gmail.com
+  orcid: https://orcid.org/YOUR-ORCID-ID
+references:
+- type: software
+  title: lattice
+  abstract: 'lattice: Trellis Graphics for R'
+  notes: Imports
+  authors:
+  - family-names: Sarkar
+    given-names: Deepayan
+    email: deepayan.sarkar@r-project.org
+    orcid: https://orcid.org/0000-0003-4107-1553
+  year: '2022'
+  url: https://CRAN.R-project.org/package=lattice
+- type: software
+  title: lme4
+  abstract: 'lme4: Linear Mixed-Effects Models using ''Eigen'' and S4'
+  notes: Imports
+  authors:
+  - family-names: Bates
+    given-names: Douglas
+    orcid: https://orcid.org/0000-0001-8316-9503
+  - family-names: Maechler
+    given-names: Martin
+    orcid: https://orcid.org/0000-0002-8685-9910
+  - family-names: Bolker
+    given-names: Ben
+    email: bbolker+lme4@gmail.com
+    orcid: https://orcid.org/0000-0002-2127-0443
+  - family-names: Walker
+    given-names: Steven
+    orcid: https://orcid.org/0000-0002-4394-9078
+  year: '2022'
+  url: https://CRAN.R-project.org/package=lme4
+- type: software
+  title: blme
+  abstract: 'blme: Bayesian Linear Mixed-Effects Models'
+  notes: Imports
+  authors:
+  - family-names: Dorie
+    given-names: Vincent
+    email: vdorie@gmail.com
+    orcid: https://orcid.org/0000-0002-9576-3064
+  year: '2022'
+  url: https://CRAN.R-project.org/package=blme
+- type: software
+  title: functional
+  abstract: 'functional: Curry, Compose, and other higher-order functions'
+  notes: Imports
+  authors:
+  - family-names: Danenberg
+    given-names: Peter
+    email: pcd@roxygen.org
+  year: '2022'
+  url: https://CRAN.R-project.org/package=functional
+- type: software
+  title: lmerTest
+  abstract: 'lmerTest: Tests in Linear Mixed Effects Models'
+  notes: Imports
+  authors:
+  - family-names: Kuznetsova
+    given-names: Alexandra
+  - family-names: Bruun Brockhoff
+    given-names: Per
+    email: perbb@dtu.dk
+  - family-names: Haubo Bojesen Christensen
+    given-names: Rune
+    email: Rune.Haubo@gmail.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=lmerTest
+- type: software
+  title: stringr
+  abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
+  notes: Imports
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=stringr
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@rstudio.com
+  year: '2022'
+  url: https://CRAN.R-project.org/package=testthat
+  version: '>= 3.0.0'
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2022'
+  url: https://www.R-project.org/
+  institution:
+    name: R Foundation for Statistical Computing
+  version: '>= 2.10'
