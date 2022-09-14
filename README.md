@@ -46,7 +46,7 @@ The returned messages about singular and unidentifiable model are only due to th
 
 If you use the power_mm function, please cite the following:
 
-Geisler, Sydney (2022).  Power Approximations for Generalized Linear Mixed Models in R Using Steep Priors on Variance Components.  MS thesis, Department of Mathematics and Statistics, Utah State University. [URL to Digital Commons here]
+Geisler, Sydney (2022).  Power Approximations for Generalized Linear Mixed Models in R Using Steep Priors on Variance Components.  MS thesis, Department of Mathematics and Statistics, Utah State University: https://digitalcommons.usu.edu/etd/8617
 
 The methodology employed in the power_mm function is described in greater detail in the above reference. 
 
